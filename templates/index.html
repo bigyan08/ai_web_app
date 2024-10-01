@@ -1,132 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Blog WebApp</title>
-     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-     <style>
-        .loader {
-  width: 48px;
-  height: 48px;
-  margin: auto;
-  position: relative;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Blog WebApp</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .loader {
+      width: 48px;
+      height: 48px;
+      margin: auto;
+      position: relative;
+    }
 
-.loader:before {
-  content: '';
-  width: 48px;
-  height: 5px;
-  background: #f0808050;
-  position: absolute;
-  top: 60px;
-  left: 0;
-  border-radius: 50%;
-  animation: shadow324 0.5s linear infinite;
-}
+    .loader:before {
+      content: '';
+      width: 48px;
+      height: 5px;
+      background: #f0808050;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      border-radius: 50%;
+      animation: shadow324 0.5s linear infinite;
+    }
 
-.loader:after {
-  content: '';
-  width: 100%;
-  height: 100%;
-  background: #f08080;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 4px;
-  animation: jump7456 0.5s linear infinite;
-}
+    .loader:after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: #f08080;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 4px;
+      animation: jump7456 0.5s linear infinite;
+    }
 
-@keyframes jump7456 {
-  15% {
-    border-bottom-right-radius: 3px;
-  }
+    @keyframes jump7456 {
+      15% {
+        border-bottom-right-radius: 3px;
+      }
 
-  25% {
-    transform: translateY(9px) rotate(22.5deg);
-  }
+      25% {
+        transform: translateY(9px) rotate(22.5deg);
+      }
 
-  50% {
-    transform: translateY(18px) scale(1, .9) rotate(45deg);
-    border-bottom-right-radius: 40px;
-  }
+      50% {
+        transform: translateY(18px) scale(1, .9) rotate(45deg);
+        border-bottom-right-radius: 40px;
+      }
 
-  75% {
-    transform: translateY(9px) rotate(67.5deg);
-  }
+      75% {
+        transform: translateY(9px) rotate(67.5deg);
+      }
 
-  100% {
-    transform: translateY(0) rotate(90deg);
-  }
-}
+      100% {
+        transform: translateY(0) rotate(90deg);
+      }
+    }
 
-@keyframes shadow324 {
+    @keyframes shadow324 {
 
-  0%,
-    100% {
-    transform: scale(1, 1);
-  }
+      0%,
+      100% {
+        transform: scale(1, 1);
+      }
 
-  50% {
-    transform: scale(1.2, 1);
-  }
-}
-     </style>
+      50% {
+        transform: scale(1.2, 1);
+      }
+    }
+  </style>
 </head>
+
 <body class="flex flex-col min-h-screen bg-gray-100 font-sans antialised">
 
-    <!-- navbar -->
-     <nav class="bg-blue-600 p-8 text-white flex justify-between">
-        <div>
-            <h1 class="text-4xl font-bold">AI Blog WebApp</h1>
+  <!-- navbar -->
+  <nav class="bg-blue-600 p-8 text-white flex justify-between">
+    <div>
+      <h1 class="text-4xl font-bold">AI Blog WebApp</h1>
 
-        </div>
-        <div>
-            <a href="#" class="hover:underline ">logout</a>
-        </div>
-     </nav>
-     <br>
-     <br>
-     <!-- main -->
-   <div class="flex-grow container mx-auto mt-10 px-5 sm:px-0">
-    <div class="bg-white max-w-5xl mx-auto p-6 rounded-lg shadow-md transition-transform transform hover:scale-105 flex flex-col">
-        <!-- intro -->
-
-        <div class="text-center">
-            <h3 class="text-3xl font-semibold mb-4">Welcome To Ai Blog Generator</h3>
-            <p class="text-gray-700 text-xl">Welcome to the AI Web Blog App, a cutting-edge web application designed to effortlessly convert YouTube videos into well-crafted, engaging blog posts. Whether you're a content creator looking to repurpose your video content, a blogger seeking fresh material, or simply someone who enjoys both video and written content, our app provides an innovative solution to enhance your digital presence.Generate high-quality blog articles just by pasting the url of the youtube video below.</p>
-        </div>
-        <!-- youtube -->
-         <br>
-        <div class="max-w-full">
-          <h2 class="text-xl mb-4 font-semibold">Enter YouTube Link</h2>
-          <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <input type="url" id="youtubelink" 
-              class="flex-grow min-w-0 p-2 border border-blue-400 rounded-lg overflow-ellipsis" 
-              placeholder="Enter YouTube Link Here...">
-            <button id="generateButton" 
-              class="w-full sm:w-max bg-blue-600 text-white border rounded-lg px-4 py-3 hover:bg-blue-500 transition-colors">
-              Generate
-            </button>
-          </div>
-        </div>
-
-         <!-- loader -->
-         <div id="loader" class="loader" style="display:none;"></div>
-         <!-- generated blog content -->
-         <section class="mt-5 text-center flex-grow">
-            <h2 class="text-3xl font-semibold font-sans mb-4">
-                Generated Blog
-            </h2>
-            <div id="content" class="text-grow mt-2">
-                this is generated content.
-            </div>
-         </section> 
     </div>
-   </div> 
-    <!-- footer -->
-    <footer class="bg-blue-600 text-white text-center p-4 mt-10">
-        <p>Made by <a href="github.com/bigyan08" class="font-semibold">Bigyan</a>. All rights reserved.</p>
+    <div>
+      <a href="#" class="hover:underline">Welcome {{user.username}}! </a>
+      <a href="{% url 'logout' %}" class="hover:underline ">logout</a>
+    </div>
+  </nav>
+  <br>
+  <br>
+  <!-- main -->
+  <div class="flex-grow container mx-auto mt-10 px-5 sm:px-0">
+    <div
+      class="bg-white max-w-5xl mx-auto p-6 rounded-lg shadow-md transition-transform transform hover:scale-105 flex flex-col">
+      <!-- intro -->
 
+      <div class="text-center">
+        <h3 class="text-3xl font-semibold mb-4">Welcome To Ai Blog Generator</h3>
+        <p class="text-gray-700 text-xl">Welcome to the AI Web Blog App, a cutting-edge web application designed to
+          effortlessly convert YouTube videos into well-crafted, engaging blog posts. Whether you're a content creator
+          looking to repurpose your video content, a blogger seeking fresh material, or simply someone who enjoys both
+          video and written content, our app provides an innovative solution to enhance your digital presence.Generate
+          high-quality blog articles just by pasting the url of the youtube video below.</p>
+      </div>
+      <!-- youtube -->
+      <br>
+      <div class="max-w-full">
+        <h2 class="text-xl mb-4 font-semibold">Enter YouTube Link</h2>
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <input type="url" id="youtubeLink"
+            class="flex-grow min-w-0 p-2 border border-blue-400 rounded-lg overflow-ellipsis"
+            placeholder="Enter YouTube Link Here...">
+          <button id="generateButton"
+            class="w-full sm:w-max bg-blue-600 text-white border rounded-lg px-4 py-3 hover:bg-blue-500 transition-colors">
+            Generate
+          </button>
+        </div>
+      </div>
+
+      <!-- loader -->
+      <div id="loader" class="loader" style="display:none;"></div>
+      <!-- generated blog content -->
+      <section class="mt-5 text-center flex-grow">
+        <h2 class="text-3xl font-semibold font-sans mb-4">
+          Generated Blog
+        </h2>
+        <div id="content" class="text-grow mt-2">
+          this is generated content.
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- footer -->
+  <footer class="bg-blue-600 text-white text-center p-4 mt-10">
+    <p>Made by <a href="github.com/bigyan08" class="font-semibold">Bigyan</a>. All rights reserved.</p>
+
+    <script>
+      document.getElementById('generateButton').addEventListener('click', async () => {
+
+        const youtubeLink = document.getElementById('youtubeLink').value;
+        const blogContent= document.getElementById('content');
+
+        if (youtubeLink) {
+          document.getElementById('loader').style.display = 'block';
+
+          blogContent.innerHTML = ''; // Clear previous content
+
+          const endpointUrl = '/generate-blog';
+
+          try {
+            const response = await fetch(endpointUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ link: youtubeLink })
+            });
+
+            const data = await response.json();
+
+            blogContent.innerHTML = data.content;
+
+          } catch (error) {
+            console.error("Error occurred:", error);
+            alert("Something went wrong. Please try again later.");
+
+          }
+          document.getElementById('loader').style.display = 'none';
+        } else {
+          alert("Please enter a YouTube link.");
+        }
+
+
+      })
+    </script>
 </body>
+
 </html>
