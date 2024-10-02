@@ -35,7 +35,7 @@ def get_transcription(link):
 
     transcriber = aai.Transcriber()
     transcript=transcriber.transcribe(audio_file)
-    return transcriber.text
+    return transcript.text
 
 def generate_blog_from_transcription(transcription):
     openai.api_key = os.getenv("OPENAI_KEY")
@@ -79,7 +79,16 @@ def generate_blog(request):
         transcription=get_transcription(yt_link)
         if not transcription:
             return JsonResponse({'error':"Transcript process failed!"},status=500)
+        
+        #use openai to generate the blog
+        blog_content =generate_blog_from_transcription(transcription)
+        if not blog_content:
+            return JsonResponse({'error':'Failed to generate blog article'}, status=500)
 
+
+
+        # return blog article as a response
+        return JsonResponse({'content':blog_content})
     else:
         return JsonResponse({'error':'Invalid request method'}, status=405) #we dont want user to use GET method.
     

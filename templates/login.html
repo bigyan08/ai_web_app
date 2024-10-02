@@ -23,7 +23,7 @@
         <div class="bg-white p-8 shadow-md rounded-lg max-w-md w-full">
 
             <!-- login form -->
-             <form class="space-y-4" method="POST" action="/">
+             <form class="space-y-4" method="POST" action="{% url 'login' %}">
                 {% csrf_token %}
                 {% if error_message %}
                 <div align="center" style="color:Red;">
