@@ -61,15 +61,14 @@ def get_transcription(link):
     audio_file = download_audio(link)
     if not audio_file:
         raise Exception("Audio file was not created.")
-
-    aai.settings.api_key = os.getenv("API_KEY_ASSEMBLYAI")
+    aai.settings.api_key = os.environ["API_KEY_ASSEMBLYAI"]
     transcriber = aai.Transcriber()
     transcript = transcriber.transcribe(audio_file)
     return transcript.text
 
 
 def generate_blog_from_transcription(transcription):
-    genai.configure(api_key=os.getenv("API_KEY_GENAI"))  # Use environment variable
+    genai.configure(api_key=os.environ['API_KEY_GENAI'])  # Use environment variable
     prompt = f'Based on the following transcript from a YouTube video, write a comprehensive blog article, write it based on the transcript, but don’t make it look like a YouTube video, make it look like a proper blog article: \n\n {transcription}\n\nArticle:'
     model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(prompt)
